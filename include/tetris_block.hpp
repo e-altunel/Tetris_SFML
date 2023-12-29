@@ -17,6 +17,7 @@ class TetrisBlock : public sf::Drawable {
   const sf::Vector2i getPosition() const;
   const sf::Vector2i getGridPosition() const;
   void setGridPosition(sf::Vector2i gridPosition);
+  void setPosition(sf::Vector2i position);
   void move(sf::Vector2i offset);
 
   bool isEmpty() const;

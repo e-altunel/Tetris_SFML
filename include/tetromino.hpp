@@ -8,6 +8,7 @@
 #include "tetris_block.hpp"
 
 namespace Tetris {
+class TetrisBoard;
 
 class Tetromino : public sf::Drawable {
  public:
@@ -18,11 +19,15 @@ class Tetromino : public sf::Drawable {
   ~Tetromino();
 
   void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+  void drawRelative(sf::RenderTarget& target, sf::RenderStates states,
+                    sf::Vector2i position) const;
 
-  void moveLeft();
-  void moveRight();
-  void moveDown();
-  void rotate();
+  bool moveLeft(const TetrisBoard& board);
+  bool moveRight(const TetrisBoard& board);
+  bool moveDown(const TetrisBoard& board);
+
+  bool rotateLeft(const TetrisBoard& board);
+  bool rotateRight(const TetrisBoard& board);
 
   const std::vector<std::vector<TetrisBlock>>& getBlocks() const;
 
@@ -31,6 +36,8 @@ class Tetromino : public sf::Drawable {
   sf::Vector2i getSize() const;
 
   bool isFilled(sf::Vector2i pos) const;
+  bool isCollided(const TetrisBoard& board) const;
+  int getScore() const;
 
  private:
   sf::Vector2i gridPosition;
@@ -39,7 +46,11 @@ class Tetromino : public sf::Drawable {
   std::vector<std::vector<TetrisBlock>> blocks;
 
   void initBlocks();
-  void move(sf::Vector2i offset);
+  bool move(const TetrisBoard& board, sf::Vector2i gridOffset);
+  bool isCollided(const TetrisBoard& board, sf::Vector2i gridOffset) const;
+  void resetBlocksGridPosition();
+  void resetBlocksPosition(sf::Vector2i position);
+  void resetVectorSize();
 };
 
 }  // namespace Tetris

@@ -18,10 +18,16 @@ class TetrisBoard {
 
   void loop();
   void draw() const;
+  bool isFilledSafe(sf::Vector2i gridPosition) const;
 
  private:
+  bool isGame;
+  int score;
+  bool lazyUpdate;
   mutable sf::RenderWindow window;
+  sf::RectangleShape background;
   std::optional<Tetromino> currentTetromino;
+  std::optional<Tetromino> nextTetromino;
   std::array<std::array<TetrisBlock, BOARD_WIDTH>, BOARD_HEIGHT> visualBoard;
   std::array<std::array<bool, BOARD_WIDTH>, BOARD_HEIGHT> logicalBoard;
 

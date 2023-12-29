@@ -40,6 +40,10 @@ void TetrisBlock::setGridPosition(sf::Vector2i gridPosition) {
       sf::Vector2f(gridPosition.x * BLOCK_SIZE, gridPosition.y * BLOCK_SIZE));
 }
 
+void TetrisBlock::setPosition(sf::Vector2i position) {
+  block.setPosition(sf::Vector2f(position.x, position.y));
+}
+
 void TetrisBlock::move(sf::Vector2i offset) {
   block.move(sf::Vector2f(offset.x * BLOCK_SIZE, offset.y * BLOCK_SIZE));
 }
